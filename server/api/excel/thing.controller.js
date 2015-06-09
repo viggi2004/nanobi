@@ -11,13 +11,15 @@
 
 var _ = require('lodash');
 var excelParser = require('excel-parser');
+var path = require('path');
+var config = require('../../config/environment');
+var excelpath = path.join(config.root,'server/api/excel/cases.xlsx')
 // Get list of things
 
 exports.getexcel = function(req, res) {
   
-
   excelParser.parse({
-    inFile: 'server/api/excel/cases.xlsx',
+    inFile: excelpath,
     worksheet : 1,
     skipEmpty : true,
   }, function(err, records){
