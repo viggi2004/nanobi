@@ -1,0 +1,30 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="row" style="margin-left:5%;width:100px">
+  <!-- <select id="sel" class="input-block-level" ng-model="currentitem.region" ng-options="obj.Region for obj in items.data | unique:'Region'">    
+          <option value="">ALL</option> -->
+      <select chosen data-placeholder="Select region" ng-model="currentitem.region" class="form-control" ng-options="o as o for o in uniqregions"></select>
+  </select>
+</div>
+<div class="row" style="margin-left:10%">
+  <div class="col-md-6">
+    <table class="table table-hover">
+      <tbody>
+        <tr><th>Date</th><th>Region</th><th>Volume</th></tr>
+        <tr ng-click="rowclick(this)" ng-repeat = "item in items.filtered  | datefilter : currentitem.start : currentitem.end : currentitem.region">
+          <td>{{item.Date}}</td><td>{{item.Region}}</td><td>{{item.Sales}}</td>
+        </tr>
+      </tbody>
+    </table>    
+  </div>
+  <div class="col-md-6">
+    <input type="text" value="0" class="dial">
+  </div>
+
+</div>
+<div class="row" style="margin-left:5%;width:60%">
+  <input type="text" id="rangeslider" name="rangeslider" value="" />
+</div>
+
+  
+</footer>
