@@ -15,9 +15,21 @@ angular.module('nanobiApp')
     //   console.log('gmap loaded')
     // });
     
-   
+   function loadScript() {
+    console.log('loadscript cakked')
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
+        '&signed_in=true&callback=initialize';
+    document.body.appendChild(script);
+    }
 
-    var initialize = function() {
+    $(document).ready(function(){
+      loadScript();
+    });
+
+
+    window.initialize = function() {
       console.log('initialize called')
       var mapOptions = {
         zoom: 8,
@@ -234,7 +246,8 @@ angular.module('nanobiApp')
     };
   };
    
-   google.maps.event.addDomListener(window, 'load', initialize);
+   //google.maps.event.addDomListener(window, 'load', initialize);
+
 
 }).filter('datefilter',function(lodash,$moment){
   return function(input,start,end,region,json){
