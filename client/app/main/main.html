@@ -10,9 +10,9 @@
   <div class="col-md-6">
     <table class="table table-hover">
       <tbody>
-        <tr><th>Date</th><th>Region</th><th>Volume</th></tr>
-        <tr ng-click="rowclick(this)" ng-repeat = "item in items.filtered  | datefilter : currentitem.start : currentitem.end : currentitem.region">
-          <td>{{item.Date}}</td><td>{{item.Region}}</td><td>{{item.Sales}}</td>
+        <tr><th>Region</th><th>Volume</th></tr>
+        <tr ng-click="rowclick(this)" ng-repeat = "(key,value) in items.filtered  | datefilter : currentitem.start : currentitem.end : currentitem.region : items.data">
+          <td>{{key}}</td><td>{{value}}</td>
         </tr>
       </tbody>
     </table>    
@@ -25,6 +25,15 @@
 <div class="row" style="margin-left:5%;width:60%">
   <input type="text" id="rangeslider" name="rangeslider" value="" />
 </div>
+<div class="row" style="margin-top:50px;height:400px;width:800px;margin-left:50px">
+  <map>
+        <!-- <info-window id="1" position="-25.363882, 131.044922" visible="true">
+          <div ng-non-bindable="">Change the zoom level</div>
+        </info-window> -->
+  </map>
+  
+</div>
+
 
   
 </footer>

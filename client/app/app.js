@@ -8,7 +8,8 @@ angular.module('nanobiApp', [
   'ui.bootstrap',
   'ui.unique',
   'ngLodash',
-  'angular-momentjs'
+  'angular-momentjs',
+  'ngMap'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
