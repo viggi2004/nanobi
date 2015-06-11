@@ -15,6 +15,18 @@ angular.module('nanobiApp')
     //   console.log('gmap loaded')
     // });
     
+    var initialize = function() {
+      console.log('initialize called')
+      var mapOptions = {
+        zoom: 8,
+        center: new google.maps.LatLng(-34.397, 150.644)
+      };
+      $scope.map = new google.maps.Map(document.getElementById('map-canvas'),
+          mapOptions);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
     
 
     $scope.items={};
@@ -39,29 +51,31 @@ angular.module('nanobiApp')
         }  
       }
       console.log($scope.cafesalesmap);
-      $scope.$on('mapInitialized', function(event, map) {
-        console.log('map initialised');
-        $scope.markers=[];
-        $scope.map=map;
+      //$scope.$on('mapInitialized', function(event, map) {
 
+    
+        //console.log('map initialised');
+        $scope.markers=[];
+        //$scope.map=map;
+        
         for(var i=0;i<$scope.items.location.length;i++)
         {
           var pos = $scope.items.location[i].Location.split(',');
           pos[0] = Number(pos[0].match(/[0-9]*\.[0-9]*/)[0]);
           pos[1] = Number(pos[1].match(/[0-9]*\.[0-9]*/)[0]);
           var pos = new google.maps.LatLng(pos[0],pos[1]);
-        map.setZoom(3);      // This will trigger a zoom_changed on the map
-        map.setCenter(pos);
+          $scope.map.setZoom(3);      // This will trigger a zoom_changed on the map
+          $scope.map.setCenter(pos);
 
           var tempmarker = new google.maps.Marker({
               position: pos,
-              map: map,
+              map: $scope.map,
               title: 'Sales at '+$scope.items.location[i]['Café ID'],
               cafeid: $scope.items.location[i]['Café ID']
           }); 
 
           $scope.markers.push(tempmarker);
-          //markers.push(tempmarker);
+          
         }
 
         for(var i=0;i<$scope.markers.length;i++)
@@ -72,7 +86,7 @@ angular.module('nanobiApp')
               content : 'Sales at '+$scope.markers[i].cafeid+' : '+$scope.cafesalesmap[$scope.markers[i].cafeid]
               });
               google.maps.event.addListener($scope.markers[i], 'click', function() {
-                infowindow.open(map,$scope.markers[i]);
+                infowindow.open($scope.map,$scope.markers[i]);
               });
             });
           })(i)
@@ -82,7 +96,7 @@ angular.module('nanobiApp')
         //console.log(map)
         //map.panTo(pos);
 
-      });
+      //});
     
 
       var aggregatedmap={};
